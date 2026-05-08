@@ -1,26 +1,26 @@
 #include "secrets.h"
 #include <Arduino.h>
-
+ 
 // Configurações do WIFI
-
+ 
 const char *WIFI_SSID = "SALA 09";
 const char *WIFI_SENHA = "info@134";
-
+ 
 //=========================================
 // MQTT
 //=========================================
 const bool USAR_AWS_IOT = false;
-
+ 
 const char *MQTT_BROKER = "6eb7b650511744a0a737b709b59923df.s1.eu.hivemq.cloud";
 const int MQTT_PORTA = 8883;
-
-const char *MQTT_CLIENT_ID = "esp32_nicolas_lopes";
-
+ 
+const char *MQTT_CLIENT_ID = "esp32_nicolas_publisher"; // ← diferente do subscriber
+ 
 const char *MQTT_USUARIO = "Nicolas";
 const char *MQTT_SENHA = "Senai@134";
-
-const bool MQTT_USAR_TLS = true; // modo de conexão sem segurança
-
+ 
+const bool MQTT_USAR_TLS = true;
+ 
 //raw string
 const char MQTT_CERTIFICADO_CA[] PROGMEM = R"EOF(
 -----BEGIN CERTIFICATE-----
@@ -54,29 +54,21 @@ oyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4kqKOJ2qxq
 mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d
 emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
 -----END CERTIFICATE-----)EOF";
-
+ 
 const char *TOPICOS_PUBLICAR[] = {
-    "senai/esp32/status",
-    "senai/esp32/log",
-    "senai/esp32/resposta"};
-
-const int TOTAL_TOPICOS_PUBLICAR = 3;
-
-const char *TOPICOS_RECEBER[] = {
     "senai/Nicolas/esp32/comando",
     "senai/Nicolas/esp32/config",
-    "senai/Nicolas/esp32/display"};
-
-const int TOTAL_TOPICOS_RECEBER = 3;
-
+    "senai/Nicolas/esp32/display"
+};
+ 
+const int TOTAL_TOPICOS_PUBLICAR = 3;
+ 
+// Publisher não precisa receber tópicos
+const char *TOPICOS_RECEBER[] = {};
+const int TOTAL_TOPICOS_RECEBER = 0;
+ 
 //=========================================
 // DEBUG
 //=========================================
-
-// 0 = sem mensagens
-// 1 = apenas erros
-// 2 = todas as mensagens
 const int DEBUG_NIVEL_INICIAL = 2;
-
-// Pino usado para forçar todas as mensagens na inicialização
 const int PINO_HABILITA_DEBUG_COMPLETO = 4;
