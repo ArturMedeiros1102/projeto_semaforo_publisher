@@ -42,7 +42,7 @@ void loop()
   if(botao.fell())
   {
   modoAtualSemaforo = (modoAtualSemaforo + 1) % 3;
-  debugInfo("Modo semáforo: " + modoAtualSemaforo);
+  debugInfo("Modo semáforo: " + String(modoAtualSemaforo));
   publicarModo(modoAtualSemaforo);
   }
 }
